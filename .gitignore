@@ -21,6 +21,7 @@ __pycache__/
 
 .env
 .env.local
+yolobit/smarthome_secrets.py
 
 .vscode/
 .idea/

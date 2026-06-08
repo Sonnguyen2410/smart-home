@@ -11,6 +11,18 @@ from aiot_dht20 import DHT20
 import time
 from aiot_lcd1602 import LCD1602
 
+try:
+  import smarthome_secrets as _secrets
+  WIFI_SSID = _secrets.WIFI_SSID
+  WIFI_PASSWORD = _secrets.WIFI_PASSWORD
+  AIO_USERNAME = _secrets.AIO_USERNAME
+  AIO_KEY = _secrets.AIO_KEY
+except:
+  WIFI_SSID = 'YOUR_WIFI_SSID'
+  WIFI_PASSWORD = 'YOUR_WIFI_PASSWORD'
+  AIO_USERNAME = 'YOUR_ADAFRUIT_USERNAME'
+  AIO_KEY = 'YOUR_ADAFRUIT_IO_KEY'
+
 tiny_rgb = RGBLed(pin16.pin, 4)
 
 # MÃ´ táº£ hÃ m nÃ y...
@@ -119,8 +131,8 @@ event_manager.add_timer_event(1000, on_event_timer_callback_y_d_c_O_g)
 
 if True:
   display.scroll('IoT')
-  mqtt.connect_wifi('ACLAB', 'ACLAB2023')
-  mqtt.connect_broker(server='io.adafruit.com', port=1883, username='phudeptrai0603', password='YOUR_ADAFRUIT_IO_KEY')
+  mqtt.connect_wifi(WIFI_SSID, WIFI_PASSWORD)
+  mqtt.connect_broker(server='io.adafruit.com', port=1883, username=AIO_USERNAME, password=AIO_KEY)
   display.scroll('OK')
   fan_on = False
   door_open = False

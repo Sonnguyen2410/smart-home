@@ -150,22 +150,19 @@ pymakr upload event_manager.py
 - ✅ Cảm biến ánh sáng kết nối pin 0
 - ✅ Cảm biến chuyển động kết nối pin 2
 
-#### Bước 2: Cấu hình WiFi
-**Chỉnh sửa trong `main.py` dòng ~130:**
+#### Bước 2: Tạo file secrets local
+Tạo file `smarthome_secrets.py` (không commit) từ mẫu `smarthome_secrets.example.py`:
 ```python
-mqtt.connect_wifi('TÊN_WIFI', 'MẬT_KHẨU_WIFI')
+WIFI_SSID = 'TEN_WIFI'
+WIFI_PASSWORD = 'MAT_KHAU_WIFI'
+AIO_USERNAME = 'TEN_ADAFRUIT'
+AIO_KEY = 'AIO_KEY_CUA_BAN'
 ```
 
+`main.py` sẽ tự đọc 4 biến này khi khởi động.
+
 #### Bước 3: Cấu hình MQTT (Adafruit IO)
-**Chỉnh sửa trong `main.py` dòng ~131:**
-```python
-mqtt.connect_broker(
-    server='io.adafruit.com', 
-    port=1883,
-    username='TÊN_ADAFRUIT',
-    password='AIO_KEY_CỦA_BẠN'
-)
-```
+Không cần sửa trực tiếp trong `main.py` nữa, chỉ cần cập nhật `AIO_USERNAME` và `AIO_KEY` trong `smarthome_secrets.py`.
 
 **Cách lấy thông tin Adafruit:**
 1. Tạo tài khoản tại https://io.adafruit.com
