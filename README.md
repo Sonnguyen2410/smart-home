@@ -1,42 +1,42 @@
 ﻿# Smart Home IoT - Yolo:Bit
 
-He thong Smart Home IoT ket hop Yolo:Bit, MQTT va web dashboard de giam sat moi truong va dieu khien thiet bi tu xa.
+Hệ thống Smart Home IoT kết hợp Yolo:Bit, MQTT và web dashboard để giám sát môi trường và điều khiển thiết bị từ xa.
 
-## Tong quan
+## Tổng quan
 
-- Thu thap du lieu nhiet do, do am, anh sang
-- Tu dong dieu khien quat, den, cua theo che do AUTO
-- Dieu khien thu cong qua dashboard web (che do MAN)
-- Dong bo du lieu qua Adafruit IO (MQTT)
+- Thu thập dữ liệu nhiệt độ, độ ẩm, ánh sáng
+- Tự động điều khiển quạt, đèn, cửa theo chế độ AUTO
+- Điều khiển thủ công qua dashboard web (chế độ MAN)
+- Đồng bộ dữ liệu qua Adafruit IO (MQTT)
 
-## Kien truc nhanh
+## Kiến trúc nhanh
 
 Sensors/Remote -> Yolo:Bit -> MQTT (Adafruit IO) -> Web Backend -> Web Frontend
 
-## Cau truc du an
+## Cấu trúc dự án
 
 ```text
 smart-home/
 |-- yolobit/                # Firmware MicroPython + file project OhStem
 |-- webapp/backend/         # Node.js + Express + MongoDB
 |-- webapp/frontend/        # React + Vite + Tailwind
-|-- tests/                  # Mock test khong can phan cung
+|-- tests/                  # Mock test không cần phần cứng
 |-- docker-compose.yml      # Database local
 |-- requirements.txt        # Python dependencies
 `-- README.md
 ```
 
-## Yeu cau
+## Yêu cầu
 
 - Python 3.10
 - Node.js 18+
 - Docker Desktop
-- Tai khoan Adafruit IO
-- OhStem App (neu nap code Yolo:Bit)
+- Tài khoản Adafruit IO
+- OhStem App (nếu nạp code Yolo:Bit)
 
-## Quick Start
+## Bắt đầu nhanh
 
-### 1) Clone va cai dat Python
+### 1) Tạo môi trường Python
 
 ```bash
 py -3.10 -m venv venv
@@ -44,7 +44,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2) Chay Backend
+### 2) Chạy Backend
 
 ```bash
 cd webapp/backend
@@ -54,9 +54,9 @@ copy config\.env.example config\.env
 npm run dev
 ```
 
-Backend mac dinh: http://localhost:3000
+Backend mặc định: http://localhost:3000
 
-### 3) Chay Frontend
+### 3) Chạy Frontend
 
 ```bash
 cd webapp/frontend
@@ -64,11 +64,11 @@ npm install
 npm run dev
 ```
 
-Frontend mac dinh: http://localhost:5173
+Frontend mặc định: http://localhost:5173
 
-### 4) Cau hinh Yolo:Bit secrets
+### 4) Cấu hình secrets cho Yolo:Bit
 
-Tao file local `yolobit/smarthome_secrets.py` tu `yolobit/smarthome_secrets.example.py`:
+Tạo file local `yolobit/smarthome_secrets.py` từ `yolobit/smarthome_secrets.example.py`:
 
 ```python
 WIFI_SSID = 'TEN_WIFI'
@@ -77,35 +77,35 @@ AIO_USERNAME = 'TEN_ADAFRUIT'
 AIO_KEY = 'AIO_KEY_CUA_BAN'
 ```
 
-File nay da duoc ignore trong git de tranh lo key.
+File này đã được ignore trong git để tránh lộ key.
 
-## Chay Yolo:Bit
+## Chạy Yolo:Bit
 
-- Nap cac file trong thu muc `yolobit/` len mach
-- Chay `main.py`
-- Khi LCD hien `OK` la da ket noi thanh cong
+- Nạp các file trong thư mục `yolobit/` lên mạch
+- Chạy `main.py`
+- Khi LCD hiện `OK` là đã kết nối thành công
 
-Chi tiet tung buoc xem tai `yolobit/README.md`.
+Chi tiết từng bước xem tại `yolobit/README.md`.
 
-## Test Mock (khong can phan cung)
+## Test mock (không cần phần cứng)
 
 ```bash
 python tests/mock_temperature.py
 python tests/mock_ir_receiver.py
 ```
 
-## Lenh huu ich
+## Lệnh hữu ích
 
 ```bash
-# Tat database local
+# Tắt database local
 cd webapp/backend
 npm run infra:down
 ```
 
-## Luu y bao mat
+## Lưu ý bảo mật
 
-- Khong commit file chua secrets
-- Neu lo AIO key, can rotate key ngay tren Adafruit IO
+- Không commit file chứa secrets
+- Nếu lộ AIO key, cần rotate key ngay trên Adafruit IO
 
 ## License
 
